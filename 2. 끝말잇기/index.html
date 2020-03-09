@@ -7,24 +7,33 @@
   </head>
   <body>
     <div id="app">
-      <div>
-        {{word}}
-      </div>
-      <form @submit.prevent="onSubmit">
-        <input v-model="value" type="text" ref="answer" />
-        <button type="submit">입력</button>
-      </form>
-      <div>
-        {{result}}
-      </div>
+      <word-relay start-word="구구단"></word-relay>
+      <word-relay start-word="끝말잇기"></word-relay>
+      <word-relay start-word="게임"></word-relay>
     </div>
   </body>
+
   <script>
-    const app = new Vue({
-      el: "#app",
+    Vue.component("wordRelay", {
+      template: `
+        <div>
+          <div>
+            {{word}}
+          </div>
+          <form @submit.prevent="onSubmit">
+            <input v-model="value" type="text" ref="answer" />
+            <button type="submit">입력</button>
+          </form>
+          <div>
+            {{result}}
+          </div>
+          <hr/>
+        </div>
+        `,
+      props: ["startWord"],
       data() {
         return {
-          word: "구구단",
+          word: this.startWord,
           value: "",
           result: ""
         };
@@ -48,6 +57,12 @@
           }
         }
       }
+    });
+  </script>
+
+  <script>
+    const app = new Vue({
+      el: "#app"
     });
   </script>
 </html>
