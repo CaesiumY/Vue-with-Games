@@ -29,22 +29,26 @@ export default {
     getAnswer() {
       const chosen = [];
       for (let i = 0; chosen.length < 4; i++) {
-        const randomNumber = Math.ceil(Math.random() * 9);
+        // 길이가 4개가 될 때까지 반복
+        const randomNumber = Math.ceil(Math.random() * 9); // 1~9까지의 랜덤 값을 뽑음
         if (chosen.includes(randomNumber)) {
-          continue;
+          // 만약 랜덤 값이 배열에 이미 있는 거면
+          continue; // if문을 빠져나와 반복문 다시 실행 -> 다시 랜덤 값 뽑음
         } else {
-          chosen.push(randomNumber);
+          chosen.push(randomNumber); // 중복된 값이 아니면 배열에 값 추가
         }
       }
-      console.log(chosen.join(""));
+      console.log(chosen.join("")); // 정답 출력
       return chosen;
     },
     resetForm() {
+      // 폼 리셋 함수
       this.value = "";
       this.$refs.answer.focus();
     },
     onSubmit() {
       if (this.value === this.answer.join("")) {
+        // 배열을 문자열로 바꿔주고 비교
         this.tries.push({
           try: this.value,
           result: "홈런"
@@ -52,7 +56,7 @@ export default {
         this.resetForm();
         this.tries = [];
         this.result = "홈런! 정답입니다!";
-        this.answer = this.getAnswer();
+        this.answer = this.getAnswer(); // 정답 초기화
       } else {
         if (this.tries.length > 9) {
           this.resetForm();
@@ -64,9 +68,12 @@ export default {
         let ball = 0;
 
         for (let i = 0; i < this.value.length; i++) {
+          // 값의 길이만큼 검사 반복
           if (parseInt(this.value[i]) === this.answer[i]) {
+            // 문자열의 값을 하나씩 가져와서 정수로 바꾼 뒤 자리가 같은지 비교
             strike++;
           } else if (this.value.includes(this.answer[i])) {
+            // 문자열 안에 해당하는 배열 값이 들어있는지 검사
             ball++;
           }
         }
