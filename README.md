@@ -10,3 +10,4 @@ https://vue-with-games.netlify.com/
 
 - [구구단](https://github.com/CaesiumY/Vue-with-Games/tree/master/1.%20%EA%B5%AC%EA%B5%AC%EB%8B%A8)
 - [끝말잇기](./2.%20끝말잇기/)
+- [숫자야구](./3.%20숫자야구/index.html)
