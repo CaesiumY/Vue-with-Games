@@ -63,6 +63,7 @@ export default {
           this.tries = [];
           this.result = `패배했습니다. 정답은 ${this.answer}입니다.`;
           this.answer = this.getAnswer();
+          return 0;
         }
         let strike = 0;
         let ball = 0;
