@@ -210,7 +210,7 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  data() {\r\n    return {\r\n      state: \"waiting\"\r\n    };\r\n  },\r\n  methods: {\r\n    onReset() {}\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack:///./ResponseCheck.vue?./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n  data() {\r\n    return {\r\n      selectedState: 0,\r\n      state: [\"waiting\", \"ready\", \"now\"],\r\n      message: \"클릭해서 시작하세요.\"\r\n    };\r\n  },\r\n  methods: {\r\n    onReset() {},\r\n    onClick() {\r\n      this.selectedState = (this.selectedState + 1) % 3;\r\n    }\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack:///./ResponseCheck.vue?./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -222,7 +222,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", [\n    _c(\"div\", { class: _vm.state, attrs: { id: \"screen\" } }),\n    _vm._v(\" \"),\n    _c(\"div\", [\n      _c(\"div\", [_vm._v(\"평균시간 {{}}\")]),\n      _vm._v(\" \"),\n      _c(\"button\", { on: { click: _vm.onReset } }, [_vm._v(\"리셋\")])\n    ])\n  ])\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./ResponseCheck.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", [\n    _c(\n      \"div\",\n      {\n        class: _vm.state[_vm.selectedState],\n        attrs: { id: \"screen\" },\n        on: { click: _vm.onClick }\n      },\n      [_vm._v(\"\\n    \" + _vm._s(_vm.message) + \"\\n  \")]\n    ),\n    _vm._v(\" \"),\n    _c(\"div\", [\n      _c(\"div\", [_vm._v(\"평균시간 {{}}\")]),\n      _vm._v(\" \"),\n      _c(\"button\", { on: { click: _vm.onReset } }, [_vm._v(\"리셋\")])\n    ])\n  ])\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./ResponseCheck.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div id="screen" :class="state"></div>
+    <div id="screen" :class="state[selectedState]" @click="onClick">
+      {{ message }}
+    </div>
     <div>
       <div>평균시간 {{}}</div>
       <button @click="onReset">리셋</button>
@@ -12,11 +14,16 @@
 export default {
   data() {
     return {
-      state: "waiting"
+      selectedState: 0,
+      state: ["waiting", "ready", "now"],
+      message: "클릭해서 시작하세요."
     };
   },
   methods: {
-    onReset() {}
+    onReset() {},
+    onClick() {
+      this.selectedState = (this.selectedState + 1) % 3;
+    }
   }
 };
 </script>
