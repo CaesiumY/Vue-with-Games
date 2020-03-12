@@ -4,9 +4,7 @@
       {{ message }}
     </div>
     <div>
-      <div>
-        평균시간 {{ result.reduce((a, c) => a + c, 0) / result.length || 0 }}ms
-      </div>
+      <div>평균시간 {{ avarage }}ms</div>
       <button @click="onReset">리셋</button>
     </div>
   </div>
@@ -24,6 +22,11 @@ export default {
       endTime: "",
       timeout: null
     };
+  },
+  computed: {
+    avarage() {
+      return this.result.reduce((a, c) => a + c, 0) / this.result.length || 0;
+    }
   },
   methods: {
     onReset() {
