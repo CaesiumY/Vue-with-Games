@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div id="screen" :class="state[selectedState]" @click="onClick">
+    <div id="screen" :class="state[selectedState % 3]" @click="onClick">
       {{ message }}
     </div>
     <div>
-      <div>평균시간 {{}}</div>
+      <div>
+        평균시간 {{ result.reduce((a, c) => a + c, 0) / result.length || 0 }}ms
+      </div>
       <button @click="onReset">리셋</button>
     </div>
   </div>
@@ -16,13 +18,38 @@ export default {
     return {
       selectedState: 0,
       state: ["waiting", "ready", "now"],
-      message: "클릭해서 시작하세요."
+      message: "클릭해서 시작하세요.",
+      result: [],
+      startTime: "",
+      endTime: "",
+      timeout: null
     };
   },
   methods: {
-    onReset() {},
+    onReset() {
+      this.result = [];
+    },
     onClick() {
-      this.selectedState = (this.selectedState + 1) % 3;
+      // this.selectedState = (this.selectedState + 1) % 3;
+
+      if (this.state[this.selectedState] === "waiting") {
+        this.selectedState = 1;
+        this.message = "초록색이 되면 클릭하세요.";
+        this.timeout = setTimeout(() => {
+          this.selectedState = 2;
+          this.message = "지금 클릭!";
+          this.startTime = new Date();
+        }, Math.floor(Math.random() * 1000) + 2000);
+      } else if (this.state[this.selectedState] === "ready") {
+        this.selectedState = 0;
+        this.message = "너무 빨랐군요!";
+        clearTimeout(this.timeout);
+      } else if (this.state[this.selectedState] === "now") {
+        this.selectedState = 0;
+        this.message = "클릭해서 시작하세요.";
+        this.endTime = new Date();
+        this.result.push(this.endTime - this.startTime);
+      }
     }
   }
 };
