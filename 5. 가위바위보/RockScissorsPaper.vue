@@ -1,10 +1,10 @@
 <template>
   <div>
     <div id="computer" :style="computedStyleObject"></div>
-    <div>
-      <button>바위</button>
-      <button>가위</button>
-      <button>보</button>
+    <div v-if="canAnswer">
+      <button @click="onClick('rock')">바위</button>
+      <button @click="onClick('scissor')">가위</button>
+      <button @click="onClick('paper')">보</button>
     </div>
     <div>
       <div>{{ result }}</div>
@@ -20,6 +20,18 @@ const coordList = {
   paper: "-282px"
 };
 
+const scores = {
+  rock: 1,
+  scissor: 0,
+  paper: -1
+};
+
+const comChoice = imgCoord => {
+  return Object.entries(coordList).find(v => {
+    return v[1] === imgCoord;
+  })[0];
+};
+
 let interval = null;
 
 export default {
@@ -28,7 +40,8 @@ export default {
       imgCoord: coordList.rock,
       result: "",
       score: 0,
-      selected: 0
+      selected: 0,
+      canAnswer: true
     };
   },
   computed: {
@@ -38,11 +51,43 @@ export default {
       };
     }
   },
+  methods: {
+    changeHandState() {
+      interval = setInterval(() => {
+        this.selected = (this.selected + 1) % Object.keys(coordList).length;
+        this.imgCoord = Object.values(coordList)[this.selected];
+      }, 100);
+      this.canAnswer = true;
+    },
+    onClick(state) {
+      clearInterval(interval);
+      const myState = scores[state];
+      const comState = scores[comChoice(this.imgCoord)];
+
+      const diff = myState - comState;
+
+      if (diff === 0) {
+        this.result = "draw";
+      } else if ([1, -2].includes(diff)) {
+        this.result = "win";
+        this.score += 1;
+      } else {
+        this.result = "lose";
+        this.score -= 1;
+      }
+
+      this.canAnswer = false;
+      if (this.score >= 10) {
+        this.result = "Champion!";
+      }
+
+      setTimeout(() => {
+        this.changeHandState();
+      }, 2000);
+    }
+  },
   mounted() {
-    interval = setInterval(() => {
-      this.selected = (this.selected + 1) % Object.keys(coordList).length;
-      this.imgCoord = Object.values(coordList)[this.selected];
-    }, 100);
+    this.changeHandState();
   },
   beforeDestroy() {
     clearInterval(interval);
