@@ -8,6 +8,8 @@
 
 <script>
 import TableComponent from "./components/TableComponent";
+import eventBus from "./eventBus";
+
 export default {
   components: {
     TableComponent
@@ -22,6 +24,75 @@ export default {
       nowTurn: "O",
       winner: ""
     };
+  },
+  created() {
+    eventBus.$on("clickTd", this.onClickTd);
+  },
+  methods: {
+    resetData(win) {
+      const rootData = this.$root.$data;
+      rootData.winner = win || "";
+      rootData.nowTurn = "O";
+      rootData.tableData = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+      ];
+    },
+    onClickTd(rowIndex, cellIndex) {
+      this.$set(this.tableData[rowIndex], cellIndex, this.nowTurn); // $set(object, key, value)
+
+      let win = false;
+      if (
+        this.tableData[rowIndex][0] === this.nowTurn &&
+        this.tableData[rowIndex][1] === this.nowTurn &&
+        this.tableData[rowIndex][2] === this.nowTurn
+      ) {
+        win = true;
+      }
+      if (
+        this.tableData[0][cellIndex] === this.nowTurn &&
+        this.tableData[1][cellIndex] === this.nowTurn &&
+        this.tableData[2][cellIndex] === this.nowTurn
+      ) {
+        win = true;
+      }
+      if (
+        this.tableData[0][0] === this.nowTurn &&
+        this.tableData[1][1] === this.nowTurn &&
+        this.tableData[2][2] === this.nowTurn
+      ) {
+        win = true;
+      }
+      if (
+        this.tableData[0][2] === this.nowTurn &&
+        this.tableData[1][1] === this.nowTurn &&
+        this.tableData[2][0] === this.nowTurn
+      ) {
+        win = true;
+      }
+
+      if (win) {
+        this.resetData(this.nowTurn);
+      } else {
+        // lose or draw
+        let all = true;
+
+        this.tableData.forEach(row => {
+          row.forEach(cell => {
+            if (!cell) {
+              all = false;
+            }
+          });
+        });
+
+        if (all) {
+          this.resetData();
+        } else {
+          this.nowTurn = this.nowTurn === "O" ? "X" : "O";
+        }
+      }
+    }
   }
 };
 </script>
