@@ -13,8 +13,14 @@ export default {
   },
   methods: {
     onClickCell() {
-      this.$root.$data.nowTurn = this.$root.$data.nowTurn === "O" ? "X" : "O";
-      console.log(this.$root.$data.nowTurn);
+      const rootData = this.$root.$data;
+      this.$set(
+        rootData.tableData[this.rowIndex],
+        this.cellIndex,
+        rootData.nowTurn
+      ); // $set(object, key, value)
+      rootData.nowTurn = rootData.nowTurn === "O" ? "X" : "O";
+      console.log(rootData);
     }
   }
 };
