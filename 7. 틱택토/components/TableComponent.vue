@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <table>
     <tr-component
       v-for="(rowData, index) in tableData"
       :key="index"
       :row-data="rowData"
       :row-index="index"
     ></tr-component>
-  </div>
+  </table>
 </template>
 
 <script>

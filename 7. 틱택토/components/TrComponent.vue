@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <tr>
     <td-component
       v-for="(cellData, index) in rowData"
       :key="index"
@@ -7,7 +7,7 @@
       :cell-index="index"
       :row-index="rowIndex"
     ></td-component>
-  </div>
+  </tr>
 </template>
 
 <script>
@@ -19,6 +19,11 @@ export default {
   props: {
     rowData: Array,
     rowIndex: Number
+  },
+  data() {
+    return {
+      me: "i am"
+    };
   }
 };
 </script>

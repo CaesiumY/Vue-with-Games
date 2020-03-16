@@ -3,7 +3,4 @@ import TicTacToe from "./TicTacToe";
 
 // new Vue(RockScissorsPaper).$mount("#app");
 
-new Vue({
-  el: "#app",
-  render: h => h(TicTacToe)
-});
+new Vue(TicTacToe).$mount("#app");
