@@ -1,7 +1,8 @@
 <template>
   <div>
-    <table-component :table-data="tableData"></table-component>
     <div>현재 {{ nowTurn }}님의 턴입니다.</div>
+    <table-component :table-data="tableData"></table-component>
+    <div v-if="winner">{{ winner }}님의 승리입니다!</div>
   </div>
 </template>
 
@@ -18,7 +19,8 @@ export default {
         ["", "", ""],
         ["", "", ""]
       ],
-      nowTurn: "O"
+      nowTurn: "O",
+      winner: ""
     };
   }
 };
