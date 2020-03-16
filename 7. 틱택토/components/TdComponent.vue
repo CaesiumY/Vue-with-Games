@@ -82,10 +82,7 @@ export default {
         } else {
           rootData.nowTurn = rootData.nowTurn === "O" ? "X" : "O";
         }
-        console.log(all);
       }
-
-      //   console.log(rootData);
     }
   }
 };
