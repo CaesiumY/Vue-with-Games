@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table-component></table-component>
+    <table-component :table-data="tableData"></table-component>
   </div>
 </template>
 
@@ -9,6 +9,15 @@ import TableComponent from "./components/TableComponent";
 export default {
   components: {
     TableComponent
+  },
+  data() {
+    return {
+      tableData: [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+      ]
+    };
   }
 };
 </script>

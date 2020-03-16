@@ -1,11 +1,17 @@
 <template>
   <div>
-    this is Td component
+    <div></div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    cellData: Array,
+    cellIndex: Number,
+    rowIndex: Number
+  }
+};
 </script>
 
 <style scoped></style>
