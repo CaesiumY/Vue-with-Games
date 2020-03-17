@@ -19,11 +19,7 @@ export default new Vuex.Store({
     nowTurn: "O",
     winner: ""
   },
-  getters: {
-    cellData(state, { row, cell }) {
-      return state.tableData[row][cell];
-    }
-  },
+  getters: {},
   mutations: {
     [SET_CELLDATA](state, { row, cell }) {
       Vue.set(state.tableData[row], cell, state.nowTurn);
