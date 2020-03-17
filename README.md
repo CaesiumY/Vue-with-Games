@@ -16,3 +16,4 @@ https://vue-with-games.netlify.com/
 - [로또](./6.%20로또/)
 - [틱택토](./7.%20틱택토/)
 - [틱택토 ver. EventBus](./7-1%20틱택토-EventBus/)
+- [틱택토 ver. Vuex](./7-2%20틱택토-Vuex/)
