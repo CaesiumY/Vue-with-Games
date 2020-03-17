@@ -12,6 +12,7 @@ import {
   SET_DRAW,
   CHANGE_TURN
 } from "../store";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   props: {
@@ -19,14 +20,10 @@ export default {
     rowIndex: Number
   },
   computed: {
+    ...mapState(["nowTurn", "tableData"]),
+
     cellData() {
       return this.$store.state.tableData[this.rowIndex][this.cellIndex];
-    },
-    nowTurn() {
-      return this.$store.state.nowTurn;
-    },
-    tableData() {
-      return this.$store.state.tableData;
     }
   },
   methods: {
