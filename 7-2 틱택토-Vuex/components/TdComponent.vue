@@ -15,15 +15,28 @@ import {
 
 export default {
   props: {
-    cellData: String,
     cellIndex: Number,
     rowIndex: Number
+  },
+  computed: {
+    cellData() {
+      return this.$store.state.tableData[this.rowIndex][this.cellIndex];
+    },
+    nowTurn() {
+      return this.$store.state.nowTurn;
+    },
+    tableData() {
+      return this.$store.state.tableData;
+    }
   },
   methods: {
     onClickCell() {
       if (!!this.cellData) return;
 
-      this.$store.commit(SET_CELLDATA);
+      this.$store.commit(SET_CELLDATA, {
+        row: this.rowIndex,
+        cell: this.cellIndex
+      });
 
       let win = false;
       if (

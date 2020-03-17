@@ -1,13 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+Vue.use(Vuex);
+
 export const SET_CELLDATA = "SET_CELLDATA";
 export const RESET_DATA = "RESET_DATA";
 export const SET_WINNER = "SET_WINNER";
 export const SET_DRAW = "SET_DRAW";
 export const CHANGE_TURN = "CHANGE_TURN";
 
-export default new Vuex({
+export default new Vuex.Store({
   state: {
     tableData: [
       ["", "", ""],
@@ -22,7 +24,7 @@ export default new Vuex({
     [SET_CELLDATA](state, { row, cell }) {
       Vue.set(state.tableData[row], cell, state.nowTurn);
     },
-    [RESET_DATA](state, winner) {
+    [RESET_DATA](state) {
       state.nowTurn = "O";
       state.tableData = [
         ["", "", ""],

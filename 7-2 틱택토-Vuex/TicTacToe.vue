@@ -8,13 +8,23 @@
 
 <script>
 import TableComponent from "./components/TableComponent";
+import store from "./store";
 
 export default {
+  store,
   components: {
     TableComponent
   },
-  data() {
-    return {};
+  computed: {
+    tableData() {
+      return this.$store.state.tableData;
+    },
+    nowTurn() {
+      return this.$store.state.nowTurn;
+    },
+    winner() {
+      return this.$store.state.winner;
+    }
   }
 };
 </script>
