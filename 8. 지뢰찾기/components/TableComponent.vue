@@ -1,9 +1,20 @@
 <template>
-  <div></div>
+  <table>
+    <tr v-for="(rowData, index) in tableData" :key="index">
+      <td v-for="(colData, index) in rowData" :key="index">
+        {{ colData }}
+      </td>
+    </tr>
+  </table>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["tableData"])
+  }
+};
 </script>
 
 <style scoped></style>

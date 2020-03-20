@@ -34,20 +34,20 @@ export default {
   },
   methods: {
     onClickStart() {
-      this.$emit.commit(START_GAME, {
+      this.$store.commit(START_GAME, {
         row: this.row,
         col: this.col,
         mine: this.mine
       });
     },
     onChangeCol(e) {
-      this.Col = e.target.value;
+      this.col = e.target.value;
     },
     onChangeRow(e) {
       this.row = e.target.value;
     },
     onChangeMine(e) {
-      this.Mine = e.target.value;
+      this.mine = e.target.value;
     }
   }
 };
