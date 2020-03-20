@@ -70,7 +70,7 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     [START_GAME](state, { row, col, mine }) {
-      if (row * col > mine) {
+      if (row * col < mine) {
         state.result = "지뢰의 수가 너무 많습니다.";
         return;
       }
