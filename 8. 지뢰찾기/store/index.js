@@ -62,26 +62,27 @@ export default new Vuex.Store({
     result: "",
     data: {
       row: 0,
-      col: 0,
+      cell: 0,
       mine: 0
     },
     tableData: []
   },
   getters: {},
   mutations: {
-    [START_GAME](state, { row, col, mine }) {
-      if (row * col < mine) {
+    [START_GAME](state, { row, cell, mine }) {
+      if (row * cell < mine) {
+        state.tableData = [];
         state.result = "지뢰의 수가 너무 많습니다.";
         return;
       }
 
       state.data = {
         row,
-        col,
+        cell,
         mine
       };
 
-      state.tableData = plantMine(row, col, mine);
+      state.tableData = plantMine(row, cell, mine);
       state.timer = 0;
     }
   },

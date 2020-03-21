@@ -3,8 +3,8 @@
     <input
       type="number"
       placeholder="가로"
-      :value="col"
-      @change="onChangeCol"
+      :value="cell"
+      @change="onChangeCell"
     />
     <input
       type="number"
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       row: 10,
-      col: 10,
+      cell: 10,
       mine: 20
     };
   },
@@ -36,12 +36,12 @@ export default {
     onClickStart() {
       this.$store.commit(START_GAME, {
         row: this.row,
-        col: this.col,
+        cell: this.cell,
         mine: this.mine
       });
     },
-    onChangeCol(e) {
-      this.col = e.target.value;
+    onChangeCell(e) {
+      this.cell = e.target.value;
     },
     onChangeRow(e) {
       this.row = e.target.value;
