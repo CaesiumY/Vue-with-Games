@@ -1,7 +1,7 @@
 <template>
   <div>
     <mine-form />
-    <div>{{ timer }}</div>
+    <div>경과 시간: {{ timer }}</div>
     <table-component />
     <div>{{ result }}</div>
   </div>
@@ -11,7 +11,7 @@
 import MineForm from "./components/MineForm";
 import TableComponent from "./components/TableComponent";
 import store from "./store";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   store,
@@ -20,7 +20,22 @@ export default {
     TableComponent
   },
   computed: {
-    ...mapState(["timer", "result"])
+    ...mapState(["timer", "result", "isPlaying"])
+  },
+  methods: {
+    ...mapMutations(["INCREMENT_TIMER"])
+  },
+  watch: {
+    isPlaying(value, prev) {
+      let interval;
+      if (value === true) {
+        interval = setInterval(() => {
+          this.INCREMENT_TIMER();
+        }, 1000);
+      } else {
+        clearInterval(interval);
+      }
+    }
   }
 };
 </script>

@@ -18,7 +18,7 @@ import { CODE } from "../store";
 export default {
   computed: {
     ...mapState(["tableData"]),
-    computedCellStyle(row, cell) {
+    computedCellStyle() {
       return (row, cell) => {
         switch (this.tableData[row][cell]) {
           case CODE.NORMAL:

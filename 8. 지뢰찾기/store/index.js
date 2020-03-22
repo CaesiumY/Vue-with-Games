@@ -4,6 +4,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export const START_GAME = "START_GAME";
+export const INCREMENT_TIMER = "INCREMENT_TIMER";
 
 export const CODE = {
   MINE: -7,
@@ -65,7 +66,8 @@ export default new Vuex.Store({
       cell: 0,
       mine: 0
     },
-    tableData: []
+    tableData: [],
+    isPlaying: false
   },
   getters: {},
   mutations: {
@@ -84,6 +86,10 @@ export default new Vuex.Store({
 
       state.tableData = plantMine(row, cell, mine);
       state.timer = 0;
+      state.isPlaying = true;
+    },
+    [INCREMENT_TIMER](state) {
+      state.timer += 1;
     }
   },
   actions: {}
