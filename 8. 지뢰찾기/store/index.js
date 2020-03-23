@@ -5,6 +5,10 @@ Vue.use(Vuex);
 
 export const START_GAME = "START_GAME";
 export const INCREMENT_TIMER = "INCREMENT_TIMER";
+export const OPEN_CELL = "OPEN_CELL";
+export const FLAG_CELL = "FLAG_CELL";
+export const QUESTION_CELL = "QUESTION_CELL";
+export const NOMALIZE_CELL = "NOMALIZE_CELL";
 
 export const CODE = {
   MINE: -7,
@@ -90,6 +94,30 @@ export default new Vuex.Store({
     },
     [INCREMENT_TIMER](state) {
       state.timer += 1;
+    },
+    [OPEN_CELL](state, { row, cell }) {
+      Vue.set(state.tableData[row], cell, CODE.OPENED);
+    },
+    [FLAG_CELL](state, { row, cell }) {
+      if (state.tableData[row][cell] === CODE.MINE) {
+        Vue.set(state.tableData[row], cell, CODE.FLAG_MINE);
+      } else {
+        Vue.set(state.tableData[row], cell, CODE.FLAG);
+      }
+    },
+    [QUESTION_CELL](state, { row, cell }) {
+      if (state.tableData[row][cell] === CODE.FLAG_MINE) {
+        Vue.set(state.tableData[row], cell, CODE.QUESTION_MINE);
+      } else {
+        Vue.set(state.tableData[row], cell, CODE.QUESTION);
+      }
+    },
+    [NOMALIZE_CELL](state, { row, cell }) {
+      if (state.tableData[row][cell] === CODE.QUESTION_MINE) {
+        Vue.set(state.tableData[row], cell, CODE.MINE);
+      } else {
+        Vue.set(state.tableData[row], cell, CODE.NORMAL);
+      }
     }
   },
   actions: {}

@@ -5,6 +5,8 @@
         v-for="(cellData, cellIndex) in rowData"
         :key="cellIndex"
         :style="computedCellStyle(rowIndex, cellIndex)"
+        @click="onClickCell(rowIndex, cellIndex)"
+        @contextmenu.prevent="onRightClickCell(rowIndex, cellIndex)"
       >
         {{ computedCellData(rowIndex, cellIndex) }}
       </td>
@@ -13,11 +15,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import { CODE } from "../store";
 export default {
   computed: {
-    ...mapState(["tableData"]),
+    ...mapState(["tableData", "isPlaying"]),
     computedCellStyle() {
       return (row, cell) => {
         switch (this.tableData[row][cell]) {
@@ -59,6 +61,44 @@ export default {
             break;
         }
       };
+    }
+  },
+  methods: {
+    ...mapMutations([
+      "OPEN_CELL",
+      "FLAG_CELL",
+      "QUESTION_CELL",
+      "NOMALIZE_CELL"
+    ]),
+    onClickCell(row, cell) {
+      if (!this.isPlaying) {
+        return;
+      }
+      this.OPEN_CELL({ row, cell });
+    },
+    onRightClickCell(row, cell) {
+      if (!this.isPlaying) {
+        return;
+      }
+      switch (this.tableData[row][cell]) {
+        case CODE.NORMAL:
+        case CODE.MINE:
+          this.FLAG_CELL({ row, cell });
+          break;
+
+        case CODE.FLAG:
+        case CODE.FLAG_MINE:
+          this.QUESTION_CELL({ row, cell });
+          break;
+
+        case CODE.QUESTION:
+        case CODE.QUESTION_MINE:
+          this.NOMALIZE_CELL({ row, cell });
+          break;
+
+        default:
+          break;
+      }
     }
   }
 };

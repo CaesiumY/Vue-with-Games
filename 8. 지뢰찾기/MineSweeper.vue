@@ -50,5 +50,6 @@ td {
   width: 40px;
   height: 40px;
   text-align: center;
+  user-select: none;
 }
 </style>
