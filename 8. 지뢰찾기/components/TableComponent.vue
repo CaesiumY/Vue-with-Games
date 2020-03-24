@@ -68,13 +68,23 @@ export default {
       "OPEN_CELL",
       "FLAG_CELL",
       "QUESTION_CELL",
-      "NOMALIZE_CELL"
+      "NOMALIZE_CELL",
+      "CLICK_MINE"
     ]),
     onClickCell(row, cell) {
       if (!this.isPlaying) {
         return;
       }
-      this.OPEN_CELL({ row, cell });
+      switch (this.tableData[row][cell]) {
+        case CODE.NORMAL:
+          return this.OPEN_CELL({ row, cell });
+
+        case CODE.MINE:
+          return this.CLICK_MINE({ row, cell });
+
+        default:
+          return;
+      }
     },
     onRightClickCell(row, cell) {
       if (!this.isPlaying) {

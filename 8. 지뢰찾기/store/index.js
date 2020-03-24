@@ -9,6 +9,7 @@ export const OPEN_CELL = "OPEN_CELL";
 export const FLAG_CELL = "FLAG_CELL";
 export const QUESTION_CELL = "QUESTION_CELL";
 export const NOMALIZE_CELL = "NOMALIZE_CELL";
+export const CLICK_MINE = "CLICK_MINE";
 
 export const CODE = {
   MINE: -7,
@@ -118,6 +119,9 @@ export default new Vuex.Store({
       } else {
         Vue.set(state.tableData[row], cell, CODE.NORMAL);
       }
+    },
+    [CLICK_MINE](state, { row, cell }) {
+      Vue.set(state.tableData[row], cell, CODE.CLICKED_MINE);
     }
   },
   actions: {}
