@@ -13,6 +13,8 @@ import TableComponent from "./components/TableComponent";
 import store from "./store";
 import { mapState, mapMutations } from "vuex";
 
+let interval;
+
 export default {
   store,
   components: {
@@ -27,7 +29,6 @@ export default {
   },
   watch: {
     isPlaying(value, prev) {
-      let interval;
       if (value === true) {
         interval = setInterval(() => {
           this.INCREMENT_TIMER();
