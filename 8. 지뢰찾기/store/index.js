@@ -97,7 +97,43 @@ export default new Vuex.Store({
       state.timer += 1;
     },
     [OPEN_CELL](state, { row, cell }) {
-      Vue.set(state.tableData[row], cell, CODE.OPENED);
+      let checkedCell = [];
+
+      const checkAround = () => {
+        if (state.tableData[row - 1]) {
+          checkedCell = checkedCell.concat([
+            state.tableData[row - 1][cell - 1],
+            state.tableData[row - 1][cell],
+            state.tableData[row - 1][cell + 1]
+          ]);
+        }
+
+        if (state.tableData[row]) {
+          checkedCell = checkedCell.concat([
+            state.tableData[row][cell - 1],
+            state.tableData[row][cell + 1]
+          ]);
+        }
+
+        if (state.tableData[row + 1]) {
+          checkedCell = checkedCell.concat([
+            state.tableData[row + 1][cell - 1],
+            state.tableData[row + 1][cell],
+            state.tableData[row + 1][cell + 1]
+          ]);
+        }
+
+        const countMine = checkedCell.filter(item => {
+          return [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(item);
+        });
+
+        console.log("checkedCell", checkedCell);
+        return countMine.length;
+      };
+
+      const countAroundMine = checkAround();
+
+      Vue.set(state.tableData[row], cell, countAroundMine);
     },
     [FLAG_CELL](state, { row, cell }) {
       if (state.tableData[row][cell] === CODE.MINE) {
@@ -122,6 +158,7 @@ export default new Vuex.Store({
     },
     [CLICK_MINE](state, { row, cell }) {
       Vue.set(state.tableData[row], cell, CODE.CLICKED_MINE);
+      state.isPlaying = false;
     }
   },
   actions: {}

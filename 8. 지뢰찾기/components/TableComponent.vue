@@ -58,6 +58,7 @@ export default {
             return "펑";
 
           default:
+            return this.tableData[row][cell] || "";
             break;
         }
       };
