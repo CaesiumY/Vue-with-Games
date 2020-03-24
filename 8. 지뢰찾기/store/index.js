@@ -92,6 +92,7 @@ export default new Vuex.Store({
       state.tableData = plantMine(row, cell, mine);
       state.timer = 0;
       state.isPlaying = true;
+      state.result = "";
     },
     [INCREMENT_TIMER](state) {
       state.timer += 1;
@@ -159,6 +160,7 @@ export default new Vuex.Store({
     [CLICK_MINE](state, { row, cell }) {
       Vue.set(state.tableData[row], cell, CODE.CLICKED_MINE);
       state.isPlaying = false;
+      state.result = "Game Over";
     }
   },
   actions: {}
