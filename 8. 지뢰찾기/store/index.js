@@ -58,7 +58,6 @@ const plantMine = (row, cell, mine) => {
     data[ver][hor] = CODE.MINE; // 해당되는 좌표에 지뢰 할당
   }
 
-  console.log("plantMine -> data", data);
   return data;
 };
 
@@ -98,10 +97,40 @@ export default new Vuex.Store({
       state.timer += 1;
     },
     [OPEN_CELL](state, { row, cell }) {
-      let checkedCell = [];
+      const alreadyCheckedCells = [];
 
-      const checkAround = () => {
+      function checkAround(row, cell) {
+        const isUndefinedRowCell =
+          row < 0 ||
+          row > state.tableData.length - 1 ||
+          cell < 0 ||
+          cell > state.tableData[0].length - 1;
+
+        if (isUndefinedRowCell) {
+          return;
+        }
+
+        if (
+          [
+            CODE.OPENED,
+            CODE.FLAG,
+            CODE.FLAG_MINE,
+            CODE.QUESTION_MINE,
+            CODE.QUESTION
+          ].includes(state.tableData[row][cell])
+        ) {
+          return;
+        }
+
+        if (alreadyCheckedCells.includes(row + "/" + cell)) {
+          return;
+        } else {
+          alreadyCheckedCells.push(row + "/" + cell);
+        }
+
+        let checkedCell = [];
         if (state.tableData[row - 1]) {
+          // 윗 줄이 있을 경우
           checkedCell = checkedCell.concat([
             state.tableData[row - 1][cell - 1],
             state.tableData[row - 1][cell],
@@ -124,17 +153,17 @@ export default new Vuex.Store({
           ]);
         }
 
-        const countMine = checkedCell.filter(item => {
+        const countAroundMine = checkedCell.filter(item => {
           return [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(item);
         });
 
+        if (countAroundMine.length === 0) {
+        }
+
         console.log("checkedCell", checkedCell);
-        return countMine.length;
-      };
-
-      const countAroundMine = checkAround();
-
-      Vue.set(state.tableData[row], cell, countAroundMine);
+        Vue.set(state.tableData[row], cell, countAroundMine.length);
+      }
+      checkAround(row, cell);
     },
     [FLAG_CELL](state, { row, cell }) {
       if (state.tableData[row][cell] === CODE.MINE) {
