@@ -157,7 +157,29 @@ export default new Vuex.Store({
           return [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(item);
         });
 
-        if (countAroundMine.length === 0) {
+        if (countAroundMine.length === 0 && row > -1) {
+          const nearCell = [];
+
+          if (row - 1 > -1) {
+            // 윗 줄이 있을 경우
+            nearCell.push([row - 1, cell - 1]);
+            nearCell.push([row - 1, cell]);
+            nearCell.push([row - 1, cell + 1]);
+          }
+          nearCell.push([row, cell - 1]);
+          nearCell.push([row, cell + 1]);
+          if (row + 1 < state.tableData.length) {
+            // 아래 줄이 있을 경우
+            nearCell.push([row + 1, cell - 1]);
+            nearCell.push([row + 1, cell]);
+            nearCell.push([row + 1, cell + 1]);
+          }
+
+          nearCell.forEach(coord => {
+            if (state.tableData[coord[0]][coord[1]] !== CODE.OPENED) {
+              checkAround(coord[0], coord[1]);
+            }
+          });
         }
 
         console.log("checkedCell", checkedCell);
