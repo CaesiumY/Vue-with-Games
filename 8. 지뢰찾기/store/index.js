@@ -183,7 +183,9 @@ export default new Vuex.Store({
             }
           });
         }
-        state.winScore += 1;
+        if (state.tableData[row][cell] === CODE.NORMAL) {
+          state.winScore += 1;
+        }
         console.log("checkedCell", checkedCell);
         Vue.set(state.tableData[row], cell, countAroundMine.length);
       }
