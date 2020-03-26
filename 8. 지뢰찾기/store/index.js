@@ -71,7 +71,8 @@ export default new Vuex.Store({
       mine: 0
     },
     tableData: [],
-    isPlaying: false
+    isPlaying: false,
+    winScore: 0
   },
   getters: {},
   mutations: {
@@ -92,6 +93,7 @@ export default new Vuex.Store({
       state.timer = 0;
       state.isPlaying = true;
       state.result = "";
+      state.winScore = 0;
     },
     [INCREMENT_TIMER](state) {
       state.timer += 1;
@@ -181,11 +183,19 @@ export default new Vuex.Store({
             }
           });
         }
-
+        state.winScore += 1;
         console.log("checkedCell", checkedCell);
         Vue.set(state.tableData[row], cell, countAroundMine.length);
       }
       checkAround(row, cell);
+
+      if (
+        state.winScore ===
+        state.data.row * state.data.cell - state.data.mine
+      ) {
+        state.result = `${state.timer}초 만에 승리하셨습니다!`;
+        state.isPlaying = false;
+      }
     },
     [FLAG_CELL](state, { row, cell }) {
       if (state.tableData[row][cell] === CODE.MINE) {

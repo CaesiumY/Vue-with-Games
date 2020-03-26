@@ -1,7 +1,9 @@
 <template>
   <div>
     <mine-form />
-    <div>경과 시간: {{ timer }}</div>
+    <div>
+      <span>경과 시간: {{ timer }}</span> <span>현재 점수: {{ winScore }}</span>
+    </div>
     <table-component />
     <div>{{ result }}</div>
   </div>
@@ -22,7 +24,7 @@ export default {
     TableComponent
   },
   computed: {
-    ...mapState(["timer", "result", "isPlaying"])
+    ...mapState(["timer", "result", "isPlaying", "winScore"])
   },
   methods: {
     ...mapMutations(["INCREMENT_TIMER"])
