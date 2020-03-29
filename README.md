@@ -1,6 +1,8 @@
-# Vue-with-Games
+# ✔Vue-with-Games
 
 웹 게임을 만들며 배우는 Vue
+
+### 👨‍💻[강의 링크](https://www.inflearn.com/course/web-game-vue/)
 
 # 💻 게임 링크
 
