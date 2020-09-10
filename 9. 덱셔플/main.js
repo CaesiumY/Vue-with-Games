@@ -5,4 +5,27 @@ new Vue({
     suits: ["♥", "♦", "♠", "♣"],
     cards: [],
   },
+  created() {
+    this.displayInitialDeck();
+  },
+  methods: {
+    displayInitialDeck() {
+      let id = 1;
+      this.cards = [];
+
+      this.suits.forEach((suit) => {
+        this.ranks.forEach((rank) => {
+          let card = {
+            id,
+            suit,
+            rank,
+          };
+          this.cards.push(card);
+          id++;
+        });
+      });
+
+      console.log(this.cards);
+    },
+  },
 });
