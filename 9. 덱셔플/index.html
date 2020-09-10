@@ -29,7 +29,7 @@
           v-for="card in cards"
           :key="card.id"
           class="card"
-          :class="{'black': card.suit ==='♠' || card.suit ==='♣', 'red': card.suit === '♥' || card.suit === '♦'}"
+          :class="suitColor[card.suit]"
         >
           <span class="card__suit card__suit--top">{{card.suit}}</span>
           <span class="card__number">{{card.rank}}</span>
