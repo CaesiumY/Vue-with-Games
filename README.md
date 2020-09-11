@@ -20,4 +20,5 @@ https://vue-with-games.netlify.com/
 - [틱택토 ver. EventBus](./7-1%20틱택토-EventBus/)
 - [틱택토 ver. Vuex](./7-2%20틱택토-Vuex/)
 - [지뢰찾기](./8.%20지뢰찾기/)
+- [덱셔플](./9.%20덱셔플/index.html)
 - [라우터](./vue-router/)
