@@ -24,6 +24,11 @@
         />
         Card Shuffling
       </h1>
+      <div class="main-buttons">
+        <button class="button is-primary" @click="shuffleDeck">
+          Shuffle<i class="fas fa-random"></i>
+        </button>
+      </div>
       <div class="deck">
         <div
           v-for="card in cards"

@@ -30,8 +30,18 @@ new Vue({
           id++;
         });
       });
+    },
+    shuffleDeck() {
+      for (let i = this.cards.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * i);
+        let temp = this.cards[i];
+        // Vue cannot detect when it is changed!
+        // this.cards[i] = this.cards[randomIndex];
+        // this.cards[randomIndex] = temp;
 
-      console.log(this.cards);
+        Vue.set(this.cards, i, this.cards[randomIndex]);
+        Vue.set(this.cards, randomIndex, temp);
+      }
     },
   },
 });
